@@ -1,7 +1,8 @@
 <bs-checkbox>
     <div class="checkbox">
         <label class="{ inlineClass }">
-            <input type="checkbox" value="{ opts.value }"> { opts.text }
+            <input type="checkbox" value="{ opts.value }">
+            { opts.text }
         <label>
     </div>
 

@@ -1,25 +1,51 @@
-var webpack = require('webpack');
+/* eslint-disable */
+const path = require('path')
+const webpack = require('webpack')
+const BitBarWebpackProgressPlugin = require('bitbar-webpack-progress-plugin');
 
 module.exports = {
-  entry: './app/index',
+  devServer: {
+    contentBase: [
+      path.join(__dirname, ".")
+    ],
+    compress: true,
+    overlay: true,
+    port: 9000,
+    publicPath: "/public/"
+  },
+  entry: './src/main.js',
   output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/public/',
+    filename: 'riot-bs.js'
   },
   plugins: [
     new webpack.ProvidePlugin({
-      riot: 'riot'
-    })
+      $: 'jquery',
+      jQuery: 'jquery',
+      jquery: 'jquery'
+    }),
+    new BitBarWebpackProgressPlugin()
   ],
   module: {
-    preLoaders: [
-      { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none' } }
-    ],
     loaders: [
-      { test: /\.js$|\.tag$/, exclude: /node_modules/, loader: 'babel-loader' }
+      {
+        test: /\.tag$/,
+        exclude: /node_modules/,
+        loader: 'riot-tag-loader',
+        query: {
+          type: 'es6', // transpile the riot tags using babel
+          hot: true,
+          debug: true
+        }
+      }, {
+        test: /\.js$/,
+        exclude: [
+          /node_modules/,
+          /spec/
+        ],
+        loader: 'babel-loader'
+      }
     ]
-  },
-  devServer: {
-    contentBase: './demo'
   }
-};
+}
