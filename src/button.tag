@@ -1,5 +1,5 @@
 <bs-button>
-  <button type="button" class="btn { buttonType } { size }" >
+  <button type="button" class="btn { buttonType } { size } { block } { active }" disabled={disabled} >
     <yield />
   </button>
 
@@ -30,5 +30,11 @@
         this.size = '';
       }
     }
+
+    this.block = (this.opts.block ? 'btn-block' : '');
+    
+    this.active = (this.opts.active ? 'active' : '');
+    
+    this.disabled = (this.opts.disabled == undefined ? false : true);
   </script>
 </bs-button>
