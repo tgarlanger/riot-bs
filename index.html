@@ -30,6 +30,8 @@
 
     <form role="form">
 
+      <h2>Inputs</h2>
+
       <bs-form-group>
         <bs-input></bs-input>
       </bs-form-group>
@@ -42,19 +44,47 @@
         <bs-input disabled></bs-input>
       </bs-form-group>
 
+      <bs-form-group>
+        <bs-input-group>
+          <virtual data-is="bs-input-addon">$</virtual>
+          <virtual data-is="bs-input" />
+        </bs-input-group>
+      </bs-form-group>
+
+      <hr>
+
+      <h2>Checkbox</h2>
       <div class="form-group">
         <bs-checkbox text="message" />
       </div>
+
+      <hr>
+
+      <h2>Buttons</h2>
+
+      <h3>Types</h3>
+
+      <bs-button>Default</bs-button>
+      <bs-button type="primary">primary</bs-button>
+      <bs-button type="success">success</bs-button>
+      <bs-button type="info">info</bs-button>
+      <bs-button type="warning">warning</bs-button>
+      <bs-button type="danger">danger</bs-button>
+      <bs-button type="link">link</bs-button>
+
+      <h3>Sizes</h3>
+
+      <bs-button size="large">Large</bs-button>
+      <bs-button>Default</bs-button>
+      <bs-button size="small">Small</bs-button>
+      <bs-button size="extra-small">extra-small</bs-button>
     </form>
   </div>
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-      riot.mount('app', {});
 
-      riot.mount('bs-input');
-      riot.mount('bs-checkbox');
-      riot.mount('bs-form-group');
+      riot.mount('*');
     });
   </script>
 </body>

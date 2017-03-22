@@ -5,7 +5,7 @@
     this.opts.type = this.opts.type || 'text';
     this.opts.required = this.opts.required || false;
     this.disabled = (this.opts.disabled == undefined ? false : true);
-    
+
     if (this.opts.size) {
       if (this.opts.size.toLowerCase() == 'large') {
         this.size = 'input-lg';
