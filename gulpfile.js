@@ -1,8 +1,6 @@
 var gulp = require('gulp');
 var riot = require('gulp-riot');
-var sass = require('gulp-sass');
 var concat = require('gulp-concat');
-var minifyCss = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
 var minify = require('gulp-minify');
 var babel = require('gulp-babel');
@@ -12,7 +10,13 @@ var webserver = require('gulp-webserver');
 
 gulp.task('bundle', function () {
   var tagsStream = gulp.src('./src/**/*.tag')
-        .pipe(riot({brackets:'{{ }}'}));
+        .pipe(riot({
+          expr: true,
+          type: 'es6'
+        }))
+        .pipe(babel({
+          presets: ['es2015-riot']
+        }));
   var es6Stream = gulp.src('./src/**/*.es6')
         .pipe(babel());
   eventStream.merge(tagsStream, es6Stream)
@@ -22,19 +26,9 @@ gulp.task('bundle', function () {
         .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('sass', function () {
-  gulp.src('./src/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat('riot-bs.min.css'))
-        .pipe(minifyCss())
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/styles/'));
-});
-
 gulp.task('watch', function(){
   gulp.watch('./src/**/*.tag',['bundle']);
   gulp.watch('./src/**/*.es6',['bundle']);
-  gulp.watch('./src/**/*.scss',['sass']);
 });
 
 gulp.task('serve', function() {
@@ -48,5 +42,5 @@ gulp.task('serve', function() {
 });
 
 gulp.task('clean', function() { del('dist/'); });
-gulp.task('build', ['clean','bundle', 'sass']);
+gulp.task('build', ['clean','bundle']);
 gulp.task('default',['watch', 'serve']);

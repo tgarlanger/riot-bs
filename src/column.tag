@@ -6,9 +6,9 @@
   <script type="es6">
     const sizes = ['xs', 'sm', 'md', 'lg'];
 
-    let columnSizes = [];
+    var columnSizes = [];
 
-    sizes.forEach(element -> {
+    sizes.forEach((element) => {
       if (this.opts[element] && !isNaN(this.opts[element])) {
         columnSizes[element] = this.opts[element];
       } else if (this.opts.sizes && this.opts.sizes[element] && !isNaN(this.opts.sizes[element])) {
@@ -16,9 +16,12 @@
       }
     });
 
-    let columnSizesClassArray = columnSizes.map((size, key) -> {
-      return 'col-' + key + '-' + size;
-    });
+
+    let columnSizesClassArray = [];
+
+    for (var key in columnSizes) {
+      columnSizesClassArray.push('col-' + key + '-' + columnSizes[key]);
+    }
 
     this.columnSizes = columnSizesClassArray.join(' ');
   </script>
