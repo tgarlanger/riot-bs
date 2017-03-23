@@ -1,5 +1,5 @@
 <bs-button>
-  <button type="button" class="btn { buttonType } { size } { block } { active }" disabled={disabled} >
+  <button type="button" class="btn { buttonType } { size } { block } { active } { opts.additionalClasses }" disabled={disabled} data-toggle={opts.toggle} >
     <yield />
   </button>
 
